@@ -7,10 +7,10 @@
  class AccesoDatos{
  private $nConexion=0;
 
-	private $ip="10.33.143.3";
-	private $usuario="ccsina_logAdm";
-	private $password="apploginpwd2013_";
-	private $db="ccsina_login";
+	private $ip="localhost";
+	private $usuario="sersubs_kentucky";
+	private $password="WJTLP01XU9IMKEN";
+	private $db="sersubs-kentucky";
 	
 	/*Realiza la conexion a la base de datos*/
     public function conectar(){
