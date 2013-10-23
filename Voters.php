@@ -95,6 +95,7 @@ class Voters {
                     WHERE id_user LIKE '". $this->id_user."'
                     AND id_voter LIKE '". $this->id_voter."'
                     ORDER BY vote_date ASC";
+                
                 $result = $oAccesoDatos -> ejecutarConsulta($query);
                 $oAccesoDatos -> desconectar();
                 if ($result) {
