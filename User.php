@@ -118,18 +118,18 @@ class User {
      * @return boolean $band true; si existe el usuario
      *
      */
-    function searchById() {
+    function searchById($id) {
         $oAccesoDatos = new AccesoDatos();
         $query = "";
         $result = null;
         $band = false;
-        if ($this -> id == "")
+        if ($id == "")
             throw new Exception("User->searchById(): error de codificaci&oacute;n, faltan datos");
         else {
             if ($oAccesoDatos -> conectar()) {
                 $query = "SELECT id, username, first_name, last_name, name, birthday, gender, email, date_register, qty_votes, place
                     FROM jb_user 
-                    WHERE id LIKE '" . $this -> id . "'";
+                    WHERE id LIKE '" . $id . "'";
                 $result = $oAccesoDatos -> ejecutarConsulta($query);
                 $oAccesoDatos -> desconectar();
                 if ($result) {
