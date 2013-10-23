@@ -13,6 +13,7 @@ class User {
     private $email = '';
     private $date_register = '';
     private $qty_votes = 0;
+    private $place = '';
 
  /*
      * Setter methods
@@ -54,8 +55,13 @@ class User {
     }
 
     public function setQtyVotes($qty_votes) {
-    $this -> qty_votes = $qty_votes;
+        $this -> qty_votes = $qty_votes;
     }
+    
+    public function setPlace($place) {
+        $this -> place = $place;
+    }
+    
     /*
      * Getter methods
      */
@@ -98,6 +104,10 @@ class User {
     public function getQtyVotes() {
         return $this -> qty_votes;
     }
+    
+    public function getPlace() {
+        return $this -> place;
+    }
 
      /*
      * public function searchById
@@ -117,7 +127,7 @@ class User {
             throw new Exception("User->searchById(): error de codificaci&oacute;n, faltan datos");
         else {
             if ($oAccesoDatos -> conectar()) {
-                $query = "SELECT id, username, first_name, last_name, name, birthday, gender, email, date_register, qty_votes
+                $query = "SELECT id, username, first_name, last_name, name, birthday, gender, email, date_register, qty_votes, place
                     FROM jb_user 
                     WHERE id LIKE '" . $this -> id . "'";
                 $result = $oAccesoDatos -> ejecutarConsulta($query);
@@ -133,6 +143,7 @@ class User {
                     $this -> email = $result[0][7];
                     $this -> date_register = $result[0][8];
                     $this -> qty_votes = $result[0][9];
+                     $this -> place = $result[0][10];
                     $band = true;
                 }
             }
@@ -166,7 +177,7 @@ class User {
             throw new Exception("User->insert(): error de codificaci&oacute;n, faltan datos");
         else {
             if ($oAccesoDatos -> conectar()) {
-                $query = "INSERT INTO jb_user (id, username, first_name, last_name, name, birthday, gender, email, date_register, qty_votes) 
+                $query = "INSERT INTO jb_user (id, username, first_name, last_name, name, birthday, gender, email, date_register, qty_votes, place) 
 					VALUES ('" . $this -> id . "', 
 					        '" . $this -> username . "', 
 					        '" . $this -> first_name . "',
@@ -176,7 +187,8 @@ class User {
 					        '" . $this -> gender . "',
 					        '" . $this -> email . "',
                              " . $this -> qty_votes . ",
-                            '" . $this -> date_register . "')";
+                            '" . $this -> date_register . "',
+                            '" . $this -> place . "')";
 
                 $result = $oAccesoDatos -> ejecutarComando($query);
                 $oAccesoDatos -> desconectar();
@@ -207,7 +219,8 @@ class User {
 					        name = '" . $this -> name . "',
 					    birthday = '" . $this -> birthday . "',
 			              gender = '" . $this -> gender . "',
-					       email = '" . $this -> email . "'
+					       email = '" . $this -> email . "',
+					       place = '" . $this -> place . "'
 					    WHERE id LIKE '" . $this -> id . "'";
                 $result = $oAccesoDatos -> ejecutarComando($query);
                 $oAccesoDatos -> desconectar();
@@ -289,7 +302,7 @@ class User {
         $oUsu = null;
         $arrUsuarios = null;
         if ($oAccesoDatos -> conectar()) {
-            $query = "SELECT id, username, first_name, last_name, name, birthday, gender, email, date_register
+            $query = "SELECT id, username, first_name, last_name, name, birthday, gender, email, date_register, qty_votes, place
 				FROM jb_user";
             $result = $oAccesoDatos -> ejecutarConsulta($query);
             $oAccesoDatos -> desconectar();
@@ -306,6 +319,9 @@ class User {
                     $oUsu -> setGender($fila[6]);
                     $oUsu -> setEmail($fila[7]);
                     $oUsu -> setDateRegister($fila[8]);
+                    $oUsu -> setQtyVotes($fila[9]);
+                    $oUsu -> setPlace($fila[10]);
+                    
                     $arrUsuarios[$j] = $oUsu;
                     $j = $j + 1;
                 }
@@ -332,7 +348,7 @@ class User {
         $fila = null;
         $j = 0;
         if ($oAccesoDatos -> conectar()) {
-            $query = "SELECT id, username, first_name, last_name, name, birthday, gender, email, date_register
+            $query = "SELECT id, username, first_name, last_name, name, birthday, gender, email, date_register, qty_votes, place
                 FROM jb_user
                 WHERE name LIKE '%".$name."%'";
             $result = $oAccesoDatos -> ejecutarConsulta($query);
@@ -350,6 +366,9 @@ class User {
                     $oUsu -> setGender($fila[6]);
                     $oUsu -> setEmail($fila[7]);
                     $oUsu -> setDateRegister($fila[8]);
+                    $oUsu -> setQtyVotes($fila[9]);
+                    $oUsu -> setPlace($fila[10]);
+                    
                     $arrUsuarios[$j] = $oUsu;
                     $j = $j + 1;
                 }
