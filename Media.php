@@ -65,7 +65,7 @@ class Media {
             $oAccesoDatos -> desconectar();
             if ($aFila) {
                 foreach ($aFila as $aLineaM) {
-                    $oMedia = new Jb_Media();
+                    $oMedia = new Media();
                     $oMedia -> setIdUser($aLineaM[0]);
                     $oMedia -> setName($aLineaM[1]);
                     $oMedia -> setType($aLineaM[2]);
@@ -101,7 +101,7 @@ class Media {
                 $oAccesoDatos -> desconectar();
                 if ($aFila) {
                     foreach ($aFila as $aLineaM) {
-                        $oMedia = new Jb_Media();
+                        $oMedia = new Media();
                         $oMedia -> setIdUser($aLineaM[0]);
                         $oMedia -> setName($aLineaM[1]);
                         $oMedia -> setType($aLineaM[2]);
