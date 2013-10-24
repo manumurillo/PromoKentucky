@@ -1,6 +1,8 @@
 <?php
 session_start();
 include_once ("User.php");
+include_once ("Voters.php");
+include_once ("Media.php");
 $error = "";
 
 function insertUserFromFacebook($id, $username, $first_name, $last_name, $name, $birthday, $gender, $email, $date_register, $qty_votes, $place) {
@@ -32,48 +34,8 @@ function insertUserFromFacebook($id, $username, $first_name, $last_name, $name, 
     }
 }
 
-function deleteUser() {
-    if (isset($_POST["user_id"])) {
-        $oUs = new User();
-        $oUs -> setId($_POST["user_id"]);
-        if ($oUs -> searchById()) {
-            $r = $oUs -> delete();
-            if ($r == 1) {
-                header("Location:/user");
-            } else {
-                $error = "Error! No se pudo ejecutar la operación.";
-                header("Location: error.php?e=" . $error);
-            }
-        } else {
-            $error = "Error! No existe el usuario.";
-            header("Location: error.php?e=" . $error);
-        }
-    }
-}
-
-function updateUser() {
-    if (isset($_POST["user_id"])) {
-        $oUs = new User();
-        $oUs -> setId($_POST["user_id"]);
-        if ($oUs -> searchById()) {
-
-            $oUs -> setUsername($_POST["username"]);
-            $ous -> setPassword($_POST["password"]);
-            $oUs -> setFacebookId($_POST["fb_id"]);
-            $oUs -> setTwitterId($_POST["tw_id"]);
-            $oUs -> setType($_POST["type"]);
-            $oUs -> setStatus($_POST["status"]);
-            $oUs -> setEmail($_POST["email"]);
-
-            $r = $oUs -> update();
-
-            if ($r == 1) {
-                header("Location:user/perfil");
-            } else {
-                $error = "Error! No se pudo ejecutar la operación.";
-                header("Location: error.php?e=" . $error);
-            }
-        }
-    }
+function voterRegister($id_user, $id_voter){
+    if()
+    
 }
 ?>

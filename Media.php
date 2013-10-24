@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-include_once ("AccesoDatos.php");
+include_once ("config/AccesoDatos.php");
 class Media {
     private $id_user = '';
     private $name = '';

@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_ALL);
 include_once ("config/AccesoDatos.php");
-include_once ("assets/Util.php");
 class Voters {
     private $id_user = '';
     private $id_voter = '';
@@ -113,9 +112,46 @@ class Voters {
         }
         return $arrVotes;
     }
-     
     
-
+    /*
+     * public function searchVotes
+     *
+     * Obtiene los registros de un votante específico.
+     * 
+     * @return boolean $band false; si no existe el usuario
+     * @return boolean $band true; si existe el usuario
+     *
+     */
+     function returnApproval($id_user, $id_voter) {
+        $oAccesoDatos = new AccesoDatos();
+        if ($id_user == "" OR 
+            $id_voter == "")
+            throw new Exception("User->returnApproval(): error de codificaci&oacute;n, faltan datos");
+        else {
+            if ($oAccesoDatos -> conectar()) {
+                $query = "SELECT count(*)
+                    FROM jb_voters
+                    WHERE id_user LIKE '". $this->id_user."'
+                    AND id_voter LIKE '". $this->id_voter."'";
+                
+                $result = $oAccesoDatos -> ejecutarConsulta($query);
+                if ($result > 0) {
+                    foreach ($result as $fila) {
+                        $query = "SELECT id_user, id_voter, vote_date
+                                FROM jb_voters
+                                WHERE id_user LIKE '". $this->id_user."'
+                                AND id_voter LIKE '". $this->id_voter."'
+                                ORDER BY vote_date DESC"; 
+                    }
+                }
+                else{
+                    return true;
+                }
+                $oAccesoDatos -> desconectar();
+            }
+        }
+        return $arrVotes;
+    }
 }
 
 
