@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-include_once ("config/AccesoDatos.php");
+include_once ("assets/AccesoDatos.php");
 class User {
     private $id = '';
     private $username = '';
